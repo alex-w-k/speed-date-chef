@@ -6,7 +6,17 @@
 
 apt_update
 
-%w(nginx gcc autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev make).each do |pkg|
+apt_repository 'yarn' do
+  uri 'https://dl.yarnpkg.com/debian/'
+  key 'https://dl.yarnpkg.com/debian/pubkey.gpg'
+  distribution 'stable'
+  components %w(main)
+  action :add
+end
+
+packages = %w(nginx nodejs yarn postgresql postgresql-contrib libpq-dev)
+
+packages.each do |pkg|
   package pkg
 end
 
@@ -18,11 +28,10 @@ user 'deploy' do
   password '$1$opyc.vcj$Uzr74O/mHAoswYI2iKB2E/'
 end
 
-rbenv_user_install 'deploy' do
-  user 'deploy'
+rbenv_system_install 'root'
 
-end
+rbenv_ruby '2.4.1'
 
-rbenv_ruby '2.4.1' do
-  user 'deploy'
+rbenv_gem 'bundler' do
+  rbenv_version '2.4.1'
 end
