@@ -50,10 +50,14 @@ describe bash('/usr/local/rbenv/versions/2.4.1/bin/gem list --local') do
   its('stdout') { should match(/bundler/) }
 end
 
-describe command('curl localhost'), :skip do
-  its('stdout') { should match /hello world/ }
-end
-
 describe file('/etc/apt/sources.list.d/yarn.list') do
   it { should exist }
+end
+
+describe user('postgres') do
+  it { should exist }
+end
+
+describe command('curl localhost'), :skip do
+  its('stdout') { should match /hello world/ }
 end
