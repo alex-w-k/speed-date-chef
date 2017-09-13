@@ -15,7 +15,7 @@ describe 'nginx::default' do
       runner.converge(described_recipe)
     end
 
-    packages = %w(nginx nodejs yarn postgresql postgresql-contrib libpq-dev yarn)
+    packages = %w(nginx nodejs yarn postgresql postgresql-contrib libpq-dev)
 
     context 'it installs all packages' do
       packages.each do |pkg|
