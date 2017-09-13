@@ -15,6 +15,15 @@ unless os.windows?
   end
 end
 
+describe file('/etc/apt/sources.list.d/yarn.list') do
+  it { should exist }
+end
+
+describe apt('yarn') do
+  it { should exist }
+  it { should be_enabled }
+end
+
 packages = %w(nginx nodejs yarn postgresql postgresql-contrib libpq-dev)
 
 packages.each do |pkg|
@@ -50,14 +59,10 @@ describe bash('/usr/local/rbenv/versions/2.4.1/bin/gem list --local') do
   its('stdout') { should match(/bundler/) }
 end
 
-describe file('/etc/apt/sources.list.d/yarn.list') do
-  it { should exist }
-end
-
 describe user('postgres') do
   it { should exist }
 end
 
-describe command('curl localhost'), :skip do
-  its('stdout') { should match /hello world/ }
+describe command('curl localhost') do
+  its('stdout') { should match /Welcome to nginx!/ }
 end

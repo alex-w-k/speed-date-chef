@@ -24,6 +24,7 @@ service 'nginx' do
   supports status: true, restart: true, reload: true
   action   [:start, :enable]
 end
+
 user 'deploy' do
   password '$1$opyc.vcj$Uzr74O/mHAoswYI2iKB2E/'
 end

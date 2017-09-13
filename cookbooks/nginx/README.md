@@ -1,4 +1,5 @@
-# nginx
+# This is the first unrefactored cookbook and will be broken out later as I learn more
 
-TODO: Enter the cookbook description here.
-
+## To test this cookbook:
+1. Have a copy of ChefDK or Chef and InSpec
+2. Run `kitchen test`
