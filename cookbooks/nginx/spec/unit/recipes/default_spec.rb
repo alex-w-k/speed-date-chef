@@ -15,6 +15,26 @@ describe 'nginx::default' do
       runner.converge(described_recipe)
     end
 
+    packages = %w(nginx nodejs yarn postgresql postgresql-contrib libpq-dev yarn)
+
+    context 'it installs all packages' do
+      packages.each do |pkg|
+        it "installs #{pkg}" do
+          expect(chef_run).to install_package(pkg)
+        end
+      end
+    end
+
+    users = %w(deploy)
+
+    context 'it creates all user accounts' do
+      users.each do |user|
+        it "has user #{user}" do
+          expect(chef_run).to create_user(user)
+        end
+      end
+    end
+
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
