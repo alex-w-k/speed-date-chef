@@ -2,5 +2,6 @@
 
 ## To test this cookbook:
 1. Have a copy of ChefDK or Chef and InSpec
-2. Run `berks install`
-3. Run `kitchen test`
+2. Have a copy of Vagrant and VirtualBox installed
+3. Run `berks install`
+4. Run `kitchen test`
