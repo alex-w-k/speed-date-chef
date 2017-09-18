@@ -19,11 +19,6 @@ describe file('/etc/apt/sources.list.d/yarn.list') do
   it { should exist }
 end
 
-describe apt('yarn') do
-  it { should exist }
-  it { should be_enabled }
-end
-
 packages = %w(nginx nodejs yarn postgresql postgresql-contrib libpq-dev)
 
 packages.each do |pkg|

@@ -25,6 +25,17 @@ service 'nginx' do
   action   [:start, :enable]
 end
 
+%w(sites-available sites-enabled conf.d).each do |leaf|
+  directory File.join(node['nginx']['dir'], leaf) do
+    mode  '0755'
+  end
+end
+
+template "#{node['nginx']['dir']}/sites-available/default" do
+  source 'default-site.erb'
+  notifies :reload, 'service[nginx]', :delayed
+end
+
 user 'deploy' do
   password '$1$opyc.vcj$Uzr74O/mHAoswYI2iKB2E/'
 end
